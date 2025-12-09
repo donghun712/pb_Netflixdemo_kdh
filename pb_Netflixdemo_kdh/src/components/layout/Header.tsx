@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
       <div className="header-inner">
         <div className="header-left">
           <Link to="/" className="header-logo">
-            WSDflix
+            KDHflix
           </Link>
           <nav className="header-nav desktop-nav">
             <NavLink to="/" end className="nav-link">
