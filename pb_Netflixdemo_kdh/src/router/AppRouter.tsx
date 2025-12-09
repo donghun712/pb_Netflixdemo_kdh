@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { SignInPage } from "../pages/SignIn/SignInPage";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 const TempHome: React.FC = () => (
   <div className="page">
@@ -19,7 +20,16 @@ export const AppRouter: React.FC = () => {
     <main className="app-main">
       <Routes>
         <Route path="/signin" element={<SignInPage />} />
-        <Route path="/" element={<TempHome />} />
+
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <TempHome />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="*" element={<TempNotFound />} />
       </Routes>
     </main>
