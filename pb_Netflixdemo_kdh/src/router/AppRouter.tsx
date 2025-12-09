@@ -3,12 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { SignInPage } from "../pages/SignIn/SignInPage";
 import { Header } from "../components/layout/Header";
 import { ProtectedRoute } from "./ProtectedRoute";
-
-const TempHome: React.FC = () => (
-  <div className="page">
-    <h1>Home (temp)</h1>
-  </div>
-);
+import { HomePage } from "../pages/Home/HomePage";
 
 const TempPopular: React.FC = () => (
   <div className="page">
@@ -41,14 +36,16 @@ export const AppRouter: React.FC = () => {
       <main className="app-main">
         <Routes>
           <Route path="/signin" element={<SignInPage />} />
+
           <Route
             path="/"
             element={
               <ProtectedRoute>
-                <TempHome />
+                <HomePage />
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/popular"
             element={
@@ -73,6 +70,7 @@ export const AppRouter: React.FC = () => {
               </ProtectedRoute>
             }
           />
+
           <Route path="*" element={<TempNotFound />} />
         </Routes>
       </main>
