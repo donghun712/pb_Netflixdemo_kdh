@@ -1,0 +1,106 @@
+.auth-page {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #222 0, #000 60%);
+}
+
+.auth-card-wrapper {
+  width: 100%;
+  max-width: 420px;
+  perspective: 1200px;
+}
+
+.auth-card {
+  position: relative;
+  background: rgba(15, 15, 15, 0.95);
+  border-radius: 16px;
+  padding: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.7);
+  transition: transform 0.25s ease-out;
+}
+
+.auth-swap {
+  transform: translateX(-4px);
+}
+
+.auth-panel {
+  transition: opacity 0.2s ease, transform 0.2s ease, filter 0.2s ease;
+}
+
+.auth-panel.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+  z-index: 2;
+}
+
+.auth-panel.is-hidden {
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  filter: blur(2px);
+  position: absolute;
+  inset: 24px;
+  z-index: 1;
+}
+
+/* 플로팅 라벨 */
+.field {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.field input {
+  width: 100%;
+  padding: 16px 12px 8px;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background: #111;
+  color: #fff;
+  outline: none;
+}
+
+.field label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #aaa;
+  transition: all 0.15s ease;
+  pointer-events: none;
+}
+
+.field input:focus + label,
+.field label.floated {
+  top: 6px;
+  font-size: 11px;
+  color: #8884ff;
+}
+
+.field input:focus {
+  border-color: #8884ff;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.switch-text {
+  margin-top: 12px;
+  font-size: 13px;
+  text-align: right;
+}
+
+.link-btn {
+  border: none;
+  background: none;
+  color: #8884ff;
+  cursor: pointer;
+}
