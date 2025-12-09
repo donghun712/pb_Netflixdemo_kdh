@@ -20,9 +20,9 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
-const USERS_KEY = "wsd:users";
-const CURRENT_USER_KEY = "wsd:currentUser";
-const KEEP_LOGIN_KEY = "wsd:keepLogin";
+const USERS_KEY = "pb:users";
+const CURRENT_USER_KEY = "pb:currentUser";
+const KEEP_LOGIN_KEY = "pb:keepLogin";
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
