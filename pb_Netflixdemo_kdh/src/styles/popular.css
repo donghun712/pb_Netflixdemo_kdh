@@ -1,0 +1,125 @@
+.popular-page {
+  padding-top: 16px;
+}
+
+.popular-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.popular-header-row h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.popular-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+.toggle-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #555;
+  background: #111;
+  color: #eee;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.toggle-btn-active {
+  background: #535bf2;
+  border-color: #535bf2;
+  color: #fff;
+}
+
+/* TABLE VIEW */
+.popular-table-wrapper {
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+  border-radius: 12px;
+  border: 1px solid #333;
+  background: #050505;
+}
+
+.popular-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.popular-table th,
+.popular-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #222;
+}
+
+.popular-table th {
+  position: sticky;
+  top: 0;
+  background: #111;
+  z-index: 1;
+  text-align: left;
+}
+
+.popular-table tbody tr:hover {
+  background: #151515;
+}
+
+.wishlist-toggle-small {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #666;
+  font-size: 16px;
+}
+
+.wishlist-toggle-small-active {
+  color: #e50914;
+}
+
+/* 페이지네이션 */
+.popular-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  position: sticky;
+  bottom: 0;
+  background: #050505;
+}
+
+.page-btn {
+  border-radius: 999px;
+  border: 1px solid #555;
+  background: #111;
+  color: #eee;
+  font-size: 12px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.page-info {
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* INFINITE VIEW */
+.popular-infinite-wrapper {
+  margin-top: 16px;
+}
+
+.popular-sentinel {
+  padding: 16px 0 32px;
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+}

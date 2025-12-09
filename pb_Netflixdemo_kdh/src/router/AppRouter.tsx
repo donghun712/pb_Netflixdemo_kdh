@@ -4,12 +4,7 @@ import { SignInPage } from "../pages/SignIn/SignInPage";
 import { Header } from "../components/layout/Header";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { HomePage } from "../pages/Home/HomePage";
-
-const TempPopular: React.FC = () => (
-  <div className="page">
-    <h1>Popular (temp)</h1>
-  </div>
-);
+import { PopularPage } from "../pages/Popular/PopularPage";
 
 const TempSearch: React.FC = () => (
   <div className="page">
@@ -50,10 +45,11 @@ export const AppRouter: React.FC = () => {
             path="/popular"
             element={
               <ProtectedRoute>
-                <TempPopular />
+                <PopularPage />
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/search"
             element={
