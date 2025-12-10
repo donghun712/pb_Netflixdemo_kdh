@@ -1,106 +1,194 @@
+/* ===== 전체 배경 ===== */
 .auth-page {
-  min-height: calc(100vh - 64px);
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  background: radial-gradient(circle at top, #222 0, #000 60%);
+  justify-content: center;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 80, 80, 0.35), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(83, 91, 242, 0.4), transparent 55%),
+    #050505;
+  padding: 24px 16px;
 }
 
+/* ===== 카드 래퍼 (3D 공간 정의) ===== */
 .auth-card-wrapper {
   width: 100%;
   max-width: 420px;
-  perspective: 1200px;
+  height: 600px; /* 카드의 높이를 고정하거나 min-height를 넉넉하게 잡아야 함 */
+  perspective: 1400px; /* 원근감 */
 }
 
+/* ===== 회전하는 컨테이너 (디자인 제거, 회전만 담당) ===== */
 .auth-card {
   position: relative;
-  background: rgba(15, 15, 15, 0.95);
-  border-radius: 16px;
-  padding: 24px;
-  overflow: hidden;
-  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.7);
-  transition: transform 0.25s ease-out;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d; /* 자식 요소의 3D 효과 유지 */
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 부드러운 회전 */
 }
 
-.auth-swap {
-  transform: translateX(-4px);
+/* 로그인 모드: 0도 */
+.auth-card.login-mode {
+  transform: rotateY(0deg);
 }
 
-.auth-panel {
-  transition: opacity 0.2s ease, transform 0.2s ease, filter 0.2s ease;
+/* 회원가입 모드: 180도 회전 */
+.auth-card.register-mode {
+  transform: rotateY(180deg);
 }
 
-.auth-panel.is-active {
-  opacity: 1;
-  transform: translateY(0);
-  position: relative;
+/* ===== 앞/뒷면 공통 디자인 (글래스 효과를 여기로 이동) ===== */
+.auth-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px 30px;
+  border-radius: 20px;
+  
+  /* 글래스모피즘 디자인 */
+  background:
+    radial-gradient(circle at 0% 0%, rgba(142, 84, 233, 0.22), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(255, 92, 135, 0.18), transparent 55%),
+    rgba(12, 6, 24, 0.85); /* 투명도를 살짝 낮춰서 뒤가 안 비치게 */
+  border: 1px solid rgba(190, 140, 255, 0.4);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(16px);
+  
+  /* 3D 설정 */
+  backface-visibility: hidden; /* 뒷면일 때 숨김 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== 앞면 (로그인) ===== */
+.auth-face-login {
+  transform: rotateY(0deg);
   z-index: 2;
 }
 
-.auth-panel.is-hidden {
-  opacity: 0;
-  transform: translateY(16px) scale(0.98);
-  filter: blur(2px);
-  position: absolute;
-  inset: 24px;
+/* ===== 뒷면 (회원가입) - 미리 180도 돌려둠 ===== */
+.auth-face-register {
+  transform: rotateY(180deg);
   z-index: 1;
 }
 
-/* 플로팅 라벨 */
+/* ===== 내부 요소 스타일 (기존 유지) ===== */
+.auth-face h2 {
+  font-size: 26px;
+  margin-bottom: 30px;
+  color: #ffffff;
+  text-align: center;
+  font-weight: 700;
+}
+
+.auth-face form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .field {
   position: relative;
-  margin-bottom: 16px;
 }
 
 .field input {
   width: 100%;
-  padding: 16px 12px 8px;
-  border-radius: 8px;
-  border: 1px solid #555;
-  background: #111;
+  padding: 16px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
   color: #fff;
   outline: none;
-}
-
-.field label {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 14px;
-  color: #aaa;
-  transition: all 0.15s ease;
-  pointer-events: none;
-}
-
-.field input:focus + label,
-.field label.floated {
-  top: 6px;
-  font-size: 11px;
-  color: #8884ff;
+  font-size: 15px;
+  transition: all 0.3s ease;
 }
 
 .field input:focus {
   border-color: #8884ff;
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 2px rgba(136, 132, 255, 0.2);
+}
+
+.field input::placeholder {
+  color: transparent; /* 플로팅 라벨 효과를 위해 투명 처리 */
+}
+
+/* 플로팅 라벨 */
+.field label {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 14px;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.field input:focus + label,
+.field input:not(:placeholder-shown) + label {
+  top: -8px;
+  left: 10px;
+  font-size: 12px;
+  color: #8884ff;
+  background: #050505; /* 라벨 뒤에 배경을 깔아 선을 가림 */
+  padding: 0 4px;
+}
+
+/* ✨ [수정됨] 로그인/회원가입 버튼 애니메이션 적용 */
+.btn-primary {
+  margin-top: 10px;
+  padding: 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #8884ff, #ff6b81);
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  
+  /* 모든 속성(배경, 위치, 그림자)을 부드럽게 전환 */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* 호버 효과: 위로 뜨면서 색상이 밝아짐 */
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.02); /* 위로 이동 및 약간 확대 */
+  filter: brightness(1.15); /* 색상 밝게 */
+  box-shadow: 0 10px 20px rgba(136, 132, 255, 0.4); /* 네온 글로우 효과 */
+}
+
+/* 클릭 효과: 살짝 눌림 */
+.btn-primary:active {
+  transform: scale(0.98) translateY(0);
+  filter: brightness(0.95);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .checkbox-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
-  margin-bottom: 12px;
+  color: #ccc;
+  font-size: 14px;
 }
 
 .switch-text {
-  margin-top: 12px;
-  font-size: 13px;
-  text-align: right;
+  margin-top: auto;
+  padding-top: 20px;
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
 }
 
 .link-btn {
-  border: none;
   background: none;
-  color: #8884ff;
+  border: none;
+  color: #ff6b81;
+  font-weight: bold;
   cursor: pointer;
+  margin-left: 5px;
 }

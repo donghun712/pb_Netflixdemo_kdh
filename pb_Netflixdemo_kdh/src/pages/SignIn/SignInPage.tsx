@@ -6,7 +6,6 @@ import "../../styles/auth.css";
 
 export const SignInPage: React.FC = () => {
   const [mode, setMode] = useState<"login" | "register">("login");
-  const [swap, setSwap] = useState(false);
 
   const [loginForm, setLoginForm] = useState({
     email: "",
@@ -26,10 +25,7 @@ export const SignInPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleModeChange = (next: "login" | "register") => {
-    if (mode === next) return;
     setMode(next);
-    setSwap(true);
-    setTimeout(() => setSwap(false), 200);
   };
 
   const onLoginSubmit = (e: React.FormEvent) => {
@@ -49,86 +45,80 @@ export const SignInPage: React.FC = () => {
 
   const onRegisterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (registerForm.password !== registerForm.confirm) {
+      showToast("비밀번호가 일치하지 않습니다.", "error");
+      return;
+    }
+    if (!registerForm.agree) {
+      showToast("이용약관에 동의해주세요.", "error");
+      return;
+    }
+
     const res = register(
       registerForm.email,
       registerForm.password,
       registerForm.confirm,
       registerForm.agree
     );
+    
     if (!res.success) {
       showToast(res.message, "error");
       return;
     }
+    
     showToast(res.message, "success");
+    // 회원가입 성공 시 로그인 화면으로 회전
     handleModeChange("login");
     setLoginForm((prev) => ({
       ...prev,
       email: registerForm.email,
-      password: registerForm.password,
     }));
   };
 
   return (
     <div className="auth-page">
       <div className="auth-card-wrapper">
-        <div
-          className={`auth-card ${mode === "login" ? "auth-login" : "auth-register"} ${
-            swap ? "auth-swap" : ""
-          }`}
-        >
-          {/* 로그인 패널 */}
-          <div
-            className={`auth-panel auth-panel-login ${
-              mode === "login" ? "is-active" : "is-hidden"
-            }`}
-          >
-            <h2>Sign In</h2>
+        {/* 이 카드가 180도 회전합니다 */}
+        <div className={`auth-card ${mode === "login" ? "login-mode" : "register-mode"}`}>
+          
+          {/* 앞면: 로그인 (0도) */}
+          <div className="auth-face auth-face-login">
+            <h2>Access Your Cinema</h2>
             <form onSubmit={onLoginSubmit}>
               <div className="field">
                 <input
                   type="email"
                   value={loginForm.email}
-                  onChange={(e) =>
-                    setLoginForm((p) => ({ ...p, email: e.target.value }))
-                  }
+                  onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
+                  placeholder=" "
                   required
                 />
-                <label className={loginForm.email ? "floated" : ""}>
-                  이메일
-                </label>
+                <label>이메일</label>
               </div>
               <div className="field">
                 <input
                   type="password"
                   value={loginForm.password}
-                  onChange={(e) =>
-                    setLoginForm((p) => ({ ...p, password: e.target.value }))
-                  }
+                  onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
+                  placeholder=" "
                   required
                 />
-                <label className={loginForm.password ? "floated" : ""}>
-                  비밀번호 (TMDB API 키)
-                </label>
+                <label>비밀번호 (TMDB API Key)</label>
               </div>
               <label className="checkbox-row">
                 <input
                   type="checkbox"
                   checked={loginForm.keepLogin}
-                  onChange={(e) =>
-                    setLoginForm((p) => ({
-                      ...p,
-                      keepLogin: e.target.checked,
-                    }))
-                  }
+                  onChange={(e) => setLoginForm({ ...loginForm, keepLogin: e.target.checked })}
                 />
                 <span>자동 로그인</span>
               </label>
-              <button className="btn btn-primary full" type="submit">
+              <button className="btn-primary" type="submit">
                 로그인
               </button>
             </form>
             <p className="switch-text">
-              아직 회원이 아니신가요?{" "}
+              아직 회원이 아니신가요?
               <button
                 type="button"
                 className="link-btn"
@@ -139,75 +129,54 @@ export const SignInPage: React.FC = () => {
             </p>
           </div>
 
-          {/* 회원가입 패널 */}
-          <div
-            className={`auth-panel auth-panel-register ${
-              mode === "register" ? "is-active" : "is-hidden"
-            }`}
-          >
+          {/* 뒷면: 회원가입 (180도 미리 돌아가 있음) */}
+          <div className="auth-face auth-face-register">
             <h2>Create Account</h2>
             <form onSubmit={onRegisterSubmit}>
               <div className="field">
                 <input
                   type="email"
                   value={registerForm.email}
-                  onChange={(e) =>
-                    setRegisterForm((p) => ({ ...p, email: e.target.value }))
-                  }
+                  onChange={(e) => setRegisterForm({ ...registerForm, email: e.target.value })}
+                  placeholder=" "
                   required
                 />
-                <label className={registerForm.email ? "floated" : ""}>
-                  이메일
-                </label>
+                <label>이메일</label>
               </div>
               <div className="field">
                 <input
                   type="password"
                   value={registerForm.password}
-                  onChange={(e) =>
-                    setRegisterForm((p) => ({
-                      ...p,
-                      password: e.target.value,
-                    }))
-                  }
+                  onChange={(e) => setRegisterForm({ ...registerForm, password: e.target.value })}
+                  placeholder=" "
                   required
                 />
-                <label className={registerForm.password ? "floated" : ""}>
-                  비밀번호 (TMDB API 키)
-                </label>
+                <label>비밀번호</label>
               </div>
               <div className="field">
                 <input
                   type="password"
                   value={registerForm.confirm}
-                  onChange={(e) =>
-                    setRegisterForm((p) => ({
-                      ...p,
-                      confirm: e.target.value,
-                    }))
-                  }
+                  onChange={(e) => setRegisterForm({ ...registerForm, confirm: e.target.value })}
+                  placeholder=" "
                   required
                 />
-                <label className={registerForm.confirm ? "floated" : ""}>
-                  비밀번호 확인
-                </label>
+                <label>비밀번호 확인</label>
               </div>
               <label className="checkbox-row">
                 <input
                   type="checkbox"
                   checked={registerForm.agree}
-                  onChange={(e) =>
-                    setRegisterForm((p) => ({ ...p, agree: e.target.checked }))
-                  }
+                  onChange={(e) => setRegisterForm({ ...registerForm, agree: e.target.checked })}
                 />
                 <span>이용약관에 동의합니다.</span>
               </label>
-              <button className="btn btn-primary full" type="submit">
+              <button className="btn-primary" type="submit">
                 회원가입
               </button>
             </form>
             <p className="switch-text">
-              이미 계정이 있으신가요?{" "}
+              이미 계정이 있으신가요?
               <button
                 type="button"
                 className="link-btn"
@@ -217,6 +186,7 @@ export const SignInPage: React.FC = () => {
               </button>
             </p>
           </div>
+          
         </div>
       </div>
     </div>
