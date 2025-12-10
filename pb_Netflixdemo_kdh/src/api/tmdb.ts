@@ -12,6 +12,13 @@ export interface Movie {
     popularity?: number;
 }
 
+export interface MovieDetail extends Movie {
+    runtime?: number;
+    genres?: { id: number; name: string }[];
+    tagline?: string;
+}
+
+
 export interface TMDBResponse<T> {
     page: number;
     results: T[];
@@ -33,15 +40,15 @@ export const getGenres = () =>
     axiosClient.get<GenreResponse>("/genre/movie/list");
 
 export const searchMovies = (params: { query: string; page?: number }) => {
-  const { query, page } = params;
+    const { query, page } = params;
 
-  return axiosClient.get<TMDBResponse<Movie>>("/search/movie", {
-    params: {
-      query,
-      page: page ?? 1,
-      include_adult: false,
-    },
-  });
+    return axiosClient.get<TMDBResponse<Movie>>("/search/movie", {
+        params: {
+            query,
+            page: page ?? 1,
+            include_adult: false,
+        },
+    });
 };
 
 
@@ -64,3 +71,6 @@ export const getUpcoming = (page = 1) =>
     axiosClient.get<TMDBResponse<Movie>>("/movie/upcoming", {
         params: { page },
     });
+
+export const getMovieDetail = (id: number) =>
+    axiosClient.get<MovieDetail>(`/movie/${id}`);

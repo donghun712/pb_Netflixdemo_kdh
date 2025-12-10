@@ -1,0 +1,98 @@
+.movie-detail-page {
+  padding: 0;
+}
+
+.movie-detail-hero {
+  position: relative;
+  min-height: 260px;
+  background: #050505;
+  margin-bottom: 24px;
+}
+
+.movie-detail-backdrop {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.4);
+}
+
+.movie-detail-hero-overlay {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  padding: 24px 16px;
+}
+
+.movie-detail-poster {
+  width: 140px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+}
+
+.movie-detail-main h1 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.movie-detail-tagline {
+  margin: 0 0 8px;
+  color: #ccc;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.movie-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+  color: #ddd;
+  margin-bottom: 8px;
+}
+
+.movie-detail-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.movie-detail-genre-chip {
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid #555;
+  font-size: 12px;
+}
+
+.movie-detail-body {
+  padding: 0 16px 24px;
+}
+
+.movie-detail-body h2 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.movie-detail-overview {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #ddd;
+  margin-bottom: 16px;
+}
+
+/* 모바일 대응 */
+@media (min-width: 768px) {
+  .movie-detail-hero-overlay {
+    padding: 32px 40px;
+  }
+  .movie-detail-poster {
+    width: 180px;
+  }
+  .movie-detail-main h1 {
+    font-size: 26px;
+  }
+  .movie-detail-body {
+    padding: 0 40px 32px;
+  }
+}

@@ -201,6 +201,20 @@
   animation: skeleton-loading 1.2s ease-in-out infinite;
 }
 
+.movie-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.wishlist-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+}
+
+
 @keyframes skeleton-loading {
   0% {
     background-position: 200% 0;
