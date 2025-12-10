@@ -5,12 +5,7 @@ import { Header } from "../components/layout/Header";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { HomePage } from "../pages/Home/HomePage";
 import { PopularPage } from "../pages/Popular/PopularPage";
-
-const TempSearch: React.FC = () => (
-  <div className="page">
-    <h1>Search (temp)</h1>
-  </div>
-);
+import { SearchPage } from "../pages/Search/SearchPage"; // ✅ 추가
 
 const TempWishlist: React.FC = () => (
   <div className="page">
@@ -54,10 +49,11 @@ export const AppRouter: React.FC = () => {
             path="/search"
             element={
               <ProtectedRoute>
-                <TempSearch />
+                <SearchPage /> 
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/wishlist"
             element={
