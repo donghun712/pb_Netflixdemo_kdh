@@ -1,6 +1,6 @@
 .page-home {
 
-  padding-top: 72px;
+    padding-top: 72px;
 
 }
 
@@ -10,15 +10,15 @@
 
 .hero {
 
-  position: relative;
+    position: relative;
 
-  height: 60vh;
+    height: 60vh;
 
-  min-height: 320px;
+    min-height: 320px;
 
-  color: #fff;
+    color: #fff;
 
-  margin-bottom: 32px;
+    margin-bottom: 32px;
 
 }
 
@@ -26,17 +26,18 @@
 
 .hero-bg {
 
-  position: absolute;
+    position: absolute;
 
-  top: -64px;  /* 헤더 높이만큼 위로 확장 */
+    top: -64px;
+    /* 헤더 높이만큼 위로 확장 */
 
-  left: 0;
+    left: 0;
 
-  right: 0;
+    right: 0;
 
-  bottom: 0;
+    bottom: 0;
 
-  overflow: hidden;
+    overflow: hidden;
 
 }
 
@@ -46,13 +47,13 @@
 
 .hero-bg img {
 
-  width: 100%;
+    width: 100%;
 
-  height: 100%;
+    height: 100%;
 
-  object-fit: cover;
+    object-fit: cover;
 
-  filter: brightness(0.6);
+    filter: brightness(0.6);
 
 }
 
@@ -60,19 +61,15 @@
 
 .hero-gradient {
 
-  position: absolute;
+    position: absolute;
 
-  inset: 0;
+    inset: 0;
 
-  background: linear-gradient(
+    background: linear-gradient(to top,
 
-    to top,
+            rgba(0, 0, 0, 0.9),
 
-    rgba(0, 0, 0, 0.9),
-
-    rgba(0, 0, 0, 0.2)
-
-  );
+            rgba(0, 0, 0, 0.2));
 
 }
 
@@ -80,13 +77,13 @@
 
 .hero-content {
 
-  position: relative;
+    position: relative;
 
-  z-index: 1;
+    z-index: 1;
 
-  padding: 80px 4vw 40px;
+    padding: 80px 4vw 40px;
 
-  max-width: 600px;
+    max-width: 600px;
 
 }
 
@@ -94,30 +91,34 @@
 
 .hero-content h1 {
 
-  font-size: 32px;
+    font-size: 32px;
 
-  margin-bottom: 16px;
+    margin-bottom: 16px;
 
 }
 
 
 
 .hero-content p {
-  /* 3줄 높이만큼 강제 할당 (줄간격 1.4 * 14px * 3줄 ≈ 60px) */
-  height: 60px; 
-  margin-bottom: 24px; /* 버튼과의 간격 고정 */
-  
-  /* 넘치는 텍스트 처리 */
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    /* 3줄 높이만큼 강제 할당 (줄간격 1.4 * 14px * 3줄 ≈ 60px) */
+    height: 60px;
+    margin-bottom: 24px;
+    /* 버튼과의 간격 고정 */
+
+    /* 넘치는 텍스트 처리 */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* 버튼 영역 위치 안정화 */
 .hero-buttons {
-  margin-top: 0; /* 불필요한 마진 제거 */
+    margin-top: 0;
+    display: flex;
+    gap: 15px;
+    /* 불필요한 마진 제거 */
 }
 
 
@@ -126,9 +127,9 @@
 
 .hero-buttons .btn.btn-light {
 
-  transition: background-color 0.2s ease, color 0.2s ease,
+    transition: background-color 0.2s ease, color 0.2s ease,
 
-    transform 0.2s ease, box-shadow 0.2s ease;
+        transform 0.2s ease, box-shadow 0.2s ease;
 
 }
 
@@ -138,13 +139,14 @@
 
 .hero-buttons .btn.btn-light:hover {
 
-  background-color: #ff4b4b;  /* 연한 빨간색 느낌 */
+    background-color: #ff4b4b;
+    /* 연한 빨간색 느낌 */
 
-  color: #fff;
+    color: #fff;
 
-  transform: translateY(-1px) scale(1.02);
+    transform: translateY(-1px) scale(1.02);
 
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
 
 }
 
@@ -154,7 +156,7 @@
 
 .movie-section {
 
-  margin-bottom: 32px;
+    margin-bottom: 32px;
 
 }
 
@@ -162,9 +164,9 @@
 
 .movie-section h2 {
 
-  font-size: 20px;
+    font-size: 20px;
 
-  margin-bottom: 12px;
+    margin-bottom: 12px;
 
 }
 
@@ -174,11 +176,11 @@
 
 .section-error {
 
-  padding: 16px 0;
+    padding: 16px 0;
 
-  font-size: 14px;
+    font-size: 14px;
 
-  color: #aaa;
+    color: #aaa;
 
 }
 
@@ -188,11 +190,11 @@
 
 .movie-grid {
 
-  display: grid;
+    display: grid;
 
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 
-  gap: 16px;
+    gap: 16px;
 
 }
 
@@ -202,15 +204,15 @@
 
 .movie-card {
 
-  background: #111;
+    background: #111;
 
-  border-radius: 12px;
+    border-radius: 12px;
 
-  overflow: hidden;
+    overflow: hidden;
 
-  position: relative;
+    position: relative;
 
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 
 }
 
@@ -218,9 +220,9 @@
 
 .movie-card:hover {
 
-  transform: translateY(-4px) scale(1.02);
+    transform: translateY(-4px) scale(1.02);
 
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
 
 }
 
@@ -228,7 +230,7 @@
 
 .movie-card-poster-wrapper {
 
-  position: relative;
+    position: relative;
 
 }
 
@@ -236,9 +238,9 @@
 
 .movie-card-poster {
 
-  width: 100%;
+    width: 100%;
 
-  display: block;
+    display: block;
 
 }
 
@@ -246,21 +248,21 @@
 
 .movie-card-no-poster {
 
-  width: 100%;
+    width: 100%;
 
-  height: 210px;
+    height: 210px;
 
-  display: flex;
+    display: flex;
 
-  align-items: center;
+    align-items: center;
 
-  justify-content: center;
+    justify-content: center;
 
-  background: #222;
+    background: #222;
 
-  color: #777;
+    color: #777;
 
-  font-size: 13px;
+    font-size: 13px;
 
 }
 
@@ -270,29 +272,25 @@
 
 .movie-card-overlay {
 
-  position: absolute;
+    position: absolute;
 
-  inset: 0;
+    inset: 0;
 
-  background: linear-gradient(
+    background: linear-gradient(to top,
 
-    to top,
+            rgba(0, 0, 0, 0.9),
 
-    rgba(0, 0, 0, 0.9),
+            rgba(0, 0, 0, 0.1));
 
-    rgba(0, 0, 0, 0.1)
+    opacity: 0;
 
-  );
+    transition: opacity 0.2s ease;
 
-  opacity: 0;
+    padding: 12px;
 
-  transition: opacity 0.2s ease;
+    display: flex;
 
-  padding: 12px;
-
-  display: flex;
-
-  align-items: flex-end;
+    align-items: flex-end;
 
 }
 
@@ -300,7 +298,7 @@
 
 .movie-card:hover .movie-card-overlay {
 
-  opacity: 1;
+    opacity: 1;
 
 }
 
@@ -308,23 +306,24 @@
 
 .movie-card-overview {
 
-  font-size: 12px;
+    font-size: 12px;
 
-  line-height: 1.4;
+    line-height: 1.4;
 
-  margin: 0;
+    margin: 0;
 
 
 
-  /* ✨ 정확히 4줄까지만 보여주고 나머지는 잘라버리기 */
+    /* ✨ 정확히 4줄까지만 보여주고 나머지는 잘라버리기 */
 
-  display: -webkit-box;
+    display: -webkit-box;
 
-  -webkit-line-clamp: 4;       /* 4줄 */
+    -webkit-line-clamp: 4;
+    /* 4줄 */
 
-  -webkit-box-orient: vertical;
+    -webkit-box-orient: vertical;
 
-  overflow: hidden;
+    overflow: hidden;
 
 }
 
@@ -336,29 +335,29 @@
 
 .wishlist-btn {
 
-  position: absolute;
+    position: absolute;
 
-  right: 8px;
+    right: 8px;
 
-  top: 8px;
+    top: 8px;
 
-  border: none;
+    border: none;
 
-  border-radius: 999px;
+    border-radius: 999px;
 
-  width: 32px;
+    width: 32px;
 
-  height: 32px;
+    height: 32px;
 
-  font-size: 16px;
+    font-size: 16px;
 
-  cursor: pointer;
+    cursor: pointer;
 
-  background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.6);
 
-  color: #ccc;
+    color: #ccc;
 
-  transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
 
 }
 
@@ -366,11 +365,11 @@
 
 .wishlist-btn-active {
 
-  background: #e50914;
+    background: #e50914;
 
-  color: #fff;
+    color: #fff;
 
-  transform: scale(1.1);
+    transform: scale(1.1);
 
 }
 
@@ -380,7 +379,7 @@
 
 .movie-card-info {
 
-  padding: 8px 10px 10px;
+    padding: 8px 10px 10px;
 
 }
 
@@ -388,9 +387,9 @@
 
 .movie-card-title {
 
-  font-size: 14px;
+    font-size: 14px;
 
-  margin: 0 0 6px;
+    margin: 0 0 6px;
 
 }
 
@@ -398,13 +397,13 @@
 
 .movie-card-meta {
 
-  font-size: 11px;
+    font-size: 11px;
 
-  color: #aaa;
+    color: #aaa;
 
-  display: flex;
+    display: flex;
 
-  justify-content: space-between;
+    justify-content: space-between;
 
 }
 
@@ -412,11 +411,11 @@
 
 .movie-skeleton-grid {
 
-  display: grid;
+    display: grid;
 
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 
-  gap: 16px;
+    gap: 16px;
 
 }
 
@@ -424,25 +423,21 @@
 
 .movie-skeleton-card {
 
-  height: 210px;
+    height: 210px;
 
-  border-radius: 12px;
+    border-radius: 12px;
 
-  background: linear-gradient(
+    background: linear-gradient(90deg,
 
-    90deg,
+            #222 0%,
 
-    #222 0%,
+            #333 20%,
 
-    #333 20%,
+            #222 40%);
 
-    #222 40%
+    background-size: 200% 100%;
 
-  );
-
-  background-size: 200% 100%;
-
-  animation: skeleton-loading 1.2s ease-in-out infinite;
+    animation: skeleton-loading 1.2s ease-in-out infinite;
 
 }
 
@@ -450,11 +445,11 @@
 
 .movie-card-link {
 
-  text-decoration: none;
+    text-decoration: none;
 
-  color: inherit;
+    color: inherit;
 
-  display: block;
+    display: block;
 
 }
 
@@ -462,13 +457,13 @@
 
 .wishlist-btn {
 
-  position: absolute;
+    position: absolute;
 
-  top: 8px;
+    top: 8px;
 
-  right: 8px;
+    right: 8px;
 
-  z-index: 10;
+    z-index: 10;
 
 }
 
@@ -478,56 +473,96 @@
 
 @keyframes skeleton-loading {
 
-  0% {
+    0% {
 
-    background-position: 200% 0;
+        background-position: 200% 0;
 
-  }
+    }
 
-  100% {
+    100% {
 
-    background-position: -200% 0;
+        background-position: -200% 0;
 
-  }
+    }
 
 }
 
 
 @media (max-width: 768px) {
 
-  /* 1. 영화 목록 한 줄에 3개 (3열) */
-  .movie-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 8px; /* 카드 간격 좁힘 */
-  }
+    .hero {
+        display: flex;
+        align-items: flex-end;
+        /* 내용을 중앙이 아닌 '바닥' 기준으로 정렬 */
+    }
 
-  /* 3열일 때 카드 내부 폰트 사이즈 최적화 */
-  .movie-card-title {
-    font-size: 11px;
-    margin-bottom: 4px;
-  }
-  
-  .movie-card-info {
-    padding: 8px 6px;
-  }
-  
-  /* 모바일에서 오버레이 설명은 가림 (터치 시 불편함 방지) */
-  .movie-card-overview {
-    display: none;
-  }
+    /* [수정] 2. 컨텐츠 박스 위치 고정 */
+    .hero-content {
+        width: 100%;
+        padding-bottom: 40px;
+        /* 바닥에서 40px 떨어진 곳에 위치 고정 */
+        /* 불필요한 상단 패딩 제거하여 위치 계산 단순화 */
+        padding-top: 0;
+    }
 
-  /* 2. 햄버거 버튼 크기 강제 축소 */
-  /* 헤더의 햄버거 아이콘(FontAwesome)이나 SVG를 직접 타겟팅 */
-  header .fa-bars,
-  header .fas.fa-bars,
-  .mobile-menu-icon,
-  nav button svg { 
-    font-size: 18px !important; /* 폰트 크기 직접 지정 (기존 대비 작게) */
-    transform: scale(0.7) !important; /* 스케일도 동시에 적용 */
-  }
-  
-  /* 혹시 버튼 태그 자체의 패딩 때문일 수 있으므로 패딩 제거 */
-  header button {
-    padding: 4px !important;
-  }
+    /* [수정] 3. 영화 제목 높이 강제 고정 (가장 중요) */
+    .hero-content h1 {
+        font-size: 24px;
+        /* 모바일용 폰트 크기 */
+        line-height: 1.2;
+        /* 줄 간격 */
+
+        /* 제목이 짧든 길든 무조건 2줄 높이(약 60px)를 차지하게 함 */
+        height: 2.4em;
+        margin-bottom: 12px;
+
+        /* 2줄 넘어가면 말줄임표(...) 처리 */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+
+        /* 텍스트가 1줄이어도 아래쪽에 배치되도록 설정 (선택사항) */
+        display: flex;
+        align-items: flex-end;
+    }
+
+    /* 1. 영화 목록 한 줄에 3개 (3열) */
+    .movie-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px;
+        /* 카드 간격 좁힘 */
+    }
+
+    /* 3열일 때 카드 내부 폰트 사이즈 최적화 */
+    .movie-card-title {
+        font-size: 11px;
+        margin-bottom: 4px;
+    }
+
+    .movie-card-info {
+        padding: 8px 6px;
+    }
+
+    /* 모바일에서 오버레이 설명은 가림 (터치 시 불편함 방지) */
+    .movie-card-overview {
+        display: none;
+    }
+
+    /* 2. 햄버거 버튼 크기 강제 축소 */
+    /* 헤더의 햄버거 아이콘(FontAwesome)이나 SVG를 직접 타겟팅 */
+    header .fa-bars,
+    header .fas.fa-bars,
+    .mobile-menu-icon,
+    nav button svg {
+        font-size: 18px !important;
+        /* 폰트 크기 직접 지정 (기존 대비 작게) */
+        transform: scale(0.7) !important;
+        /* 스케일도 동시에 적용 */
+    }
+
+    /* 혹시 버튼 태그 자체의 패딩 때문일 수 있으므로 패딩 제거 */
+    header button {
+        padding: 4px !important;
+    }
 }

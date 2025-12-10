@@ -17,7 +17,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
-  const showToast = (message: string, type: Toast["type"] = "info") => {
+  const show= (message: string, type: Toast["type"] = "info") => {
     const id = Date.now();
     setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => {
@@ -26,11 +26,11 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   return (
-    <ToastContext.Provider value={{ showToast }}>
+    <ToastContext.Provider value={{ show}}>
       {children}
       <div className="toast-container">
         {toasts.map((t) => (
-          <div key={t.id} className={`toast toast-${t.type}`}>
+          <div key={t.id} className={`toast-${t.type}`}>
             {t.message}
           </div>
         ))}
