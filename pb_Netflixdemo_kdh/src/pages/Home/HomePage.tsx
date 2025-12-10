@@ -6,7 +6,7 @@ import {
     getUpcoming,
     Movie,
 } from "../../api/tmdb";
-    import { useMovies } from "../../hooks/useMovies";
+import { useMovies } from "../../hooks/useMovies";
 import { useWishlist } from "../../hooks/useWishlist";
 import { MovieGrid } from "../../components/movies/MovieGrid";
 import "../../styles/movies.css";
@@ -57,11 +57,10 @@ export const HomePage: React.FC = () => {
                             </Link>
 
                             <button
-                                className={`btn ${
-                                    isWishlisted(heroMovie.id)
+                                className={`btn ${isWishlisted(heroMovie.id)
                                         ? "btn-secondary"
                                         : "btn-outline-light"
-                                }`}
+                                    }`}
                                 onClick={() => toggle(heroMovie)}
                             >
                                 {isWishlisted(heroMovie.id) ? "찜 해제" : "찜하기"}

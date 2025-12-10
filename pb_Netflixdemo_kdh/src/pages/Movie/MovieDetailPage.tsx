@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getMovieDetail, MovieDetail } from "../../api/tmdb";
+import { useWishlist } from "../../hooks/useWishlist";
 import "../../styles/movies.css";
 import "../../styles/movie-detail.css";
 
@@ -10,12 +11,17 @@ const BACKDROP_BASE = "https://image.tmdb.org/t/p/original";
 export const MovieDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+
   const [movie, setMovie] = useState<MovieDetail | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // ✅ 위시리스트 연동 (기존 카드/홈과 같은 훅)
+  const { toggle, isWishlisted } = useWishlist();
+
   useEffect(() => {
     if (!id) return;
+
     const fetchDetail = async () => {
       try {
         setIsLoading(true);
@@ -29,6 +35,7 @@ export const MovieDetailPage: React.FC = () => {
         setIsLoading(false);
       }
     };
+
     fetchDetail();
   }, [id]);
 
@@ -49,7 +56,7 @@ export const MovieDetailPage: React.FC = () => {
       <div className="page movie-detail-page">
         <div className="section-error">{error}</div>
         <button className="btn btn-outline" onClick={handleBack}>
-          뒤로가기
+          ← 뒤로가기
         </button>
       </div>
     );
@@ -60,14 +67,17 @@ export const MovieDetailPage: React.FC = () => {
       <div className="page movie-detail-page">
         <div className="section-error">영화 정보를 찾을 수 없습니다.</div>
         <button className="btn btn-outline" onClick={handleBack}>
-          뒤로가기
+          ← 뒤로가기
         </button>
       </div>
     );
   }
 
+  const wished = isWishlisted(movie.id);
+
   return (
     <div className="page movie-detail-page">
+      {/* 상단 히어로 영역 */}
       <div className="movie-detail-hero">
         {movie.backdrop_path && (
           <div
@@ -77,6 +87,7 @@ export const MovieDetailPage: React.FC = () => {
             }}
           />
         )}
+
         <div className="movie-detail-hero-overlay">
           {movie.poster_path && (
             <img
@@ -85,16 +96,20 @@ export const MovieDetailPage: React.FC = () => {
               className="movie-detail-poster"
             />
           )}
+
           <div className="movie-detail-main">
             <h1>{movie.title}</h1>
+
             {movie.tagline && (
               <p className="movie-detail-tagline">"{movie.tagline}"</p>
             )}
+
             <div className="movie-detail-meta">
               <span>{movie.release_date}</span>
               <span>· 평점 {movie.vote_average.toFixed(1)}</span>
               {movie.runtime && <span>· {movie.runtime}분</span>}
             </div>
+
             {movie.genres && movie.genres.length > 0 && (
               <div className="movie-detail-genres">
                 {movie.genres.map((g) => (
@@ -104,19 +119,32 @@ export const MovieDetailPage: React.FC = () => {
                 ))}
               </div>
             )}
+
+            {/* ✅ 상세 페이지에서도 찜 토글 버튼 */}
+            <div style={{ marginTop: "16px", display: "flex", gap: "8px" }}>
+              <button
+                className={`btn ${
+                  wished ? "btn-secondary" : "btn-outline"
+                }`}
+                onClick={() => toggle(movie)}
+              >
+                {wished ? "찜 해제" : "찜하기"}
+              </button>
+
+              <button className="btn btn-outline" onClick={handleBack}>
+                ← 뒤로가기
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
+      {/* 줄거리 영역 */}
       <div className="movie-detail-body">
         <h2>줄거리</h2>
         <p className="movie-detail-overview">
           {movie.overview || "줄거리 정보가 없습니다."}
         </p>
-
-        <button className="btn btn-outline" onClick={handleBack}>
-          ← 뒤로가기
-        </button>
       </div>
     </div>
   );

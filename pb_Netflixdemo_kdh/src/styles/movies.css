@@ -1,5 +1,5 @@
 .page-home {
-  padding-top: 0;
+  padding-top: 72px;
 }
 
 /* HERO 영역 */
@@ -13,9 +13,13 @@
 
 .hero-bg {
   position: absolute;
-  inset: 0;
+  top: -64px;  /* 헤더 높이만큼 위로 확장 */
+  left: 0;
+  right: 0;
+  bottom: 0;
   overflow: hidden;
 }
+
 
 .hero-bg img {
   width: 100%;
@@ -57,6 +61,20 @@
   margin-top: 16px;
   display: flex;
   gap: 12px;
+}
+
+/* HERO '자세히 보기' 버튼 hover 효과 */
+.hero-buttons .btn.btn-light {
+  transition: background-color 0.2s ease, color 0.2s ease,
+    transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* 마우스를 올리면 살짝 올라가고 연한 빨간색으로 */
+.hero-buttons .btn.btn-light:hover {
+  background-color: #ff4b4b;  /* 연한 빨간색 느낌 */
+  color: #fff;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
 }
 
 /* 섹션 공통 */
@@ -139,9 +157,16 @@
 
 .movie-card-overview {
   font-size: 12px;
-  max-height: 4.4em;
+  line-height: 1.4;
+  margin: 0;
+
+  /* ✨ 정확히 4줄까지만 보여주고 나머지는 잘라버리기 */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;       /* 4줄 */
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
 
 /* 찜 버튼 */
 .wishlist-btn {
