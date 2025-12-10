@@ -103,27 +103,21 @@
 
 
 .hero-content p {
-
-  font-size: 14px;
-
-  color: #ddd;
-
-  max-height: 3.6em;
-
+  /* 3줄 높이만큼 강제 할당 (줄간격 1.4 * 14px * 3줄 ≈ 60px) */
+  height: 60px; 
+  margin-bottom: 24px; /* 버튼과의 간격 고정 */
+  
+  /* 넘치는 텍스트 처리 */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-
+  text-overflow: ellipsis;
 }
 
-
-
+/* 버튼 영역 위치 안정화 */
 .hero-buttons {
-
-  margin-top: 16px;
-
-  display: flex;
-
-  gap: 12px;
-
+  margin-top: 0; /* 불필요한 마진 제거 */
 }
 
 
@@ -496,4 +490,44 @@
 
   }
 
+}
+
+
+@media (max-width: 768px) {
+
+  /* 1. 영화 목록 한 줄에 3개 (3열) */
+  .movie-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px; /* 카드 간격 좁힘 */
+  }
+
+  /* 3열일 때 카드 내부 폰트 사이즈 최적화 */
+  .movie-card-title {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+  
+  .movie-card-info {
+    padding: 8px 6px;
+  }
+  
+  /* 모바일에서 오버레이 설명은 가림 (터치 시 불편함 방지) */
+  .movie-card-overview {
+    display: none;
+  }
+
+  /* 2. 햄버거 버튼 크기 강제 축소 */
+  /* 헤더의 햄버거 아이콘(FontAwesome)이나 SVG를 직접 타겟팅 */
+  header .fa-bars,
+  header .fas.fa-bars,
+  .mobile-menu-icon,
+  nav button svg { 
+    font-size: 18px !important; /* 폰트 크기 직접 지정 (기존 대비 작게) */
+    transform: scale(0.7) !important; /* 스케일도 동시에 적용 */
+  }
+  
+  /* 혹시 버튼 태그 자체의 패딩 때문일 수 있으므로 패딩 제거 */
+  header button {
+    padding: 4px !important;
+  }
 }

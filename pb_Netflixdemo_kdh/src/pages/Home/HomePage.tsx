@@ -11,6 +11,7 @@ import { useWishlist } from "../../hooks/useWishlist";
 import { MovieGrid } from "../../components/movies/MovieGrid";
 import "../../styles/movies.css";
 import { Link } from "react-router-dom";
+import { ScrollTopButton } from "../../components/common/ScrollTopButton";
 
 const HERO_IMG_BASE = "https://image.tmdb.org/t/p/original";
 
@@ -137,6 +138,8 @@ export const HomePage: React.FC = () => {
                     />
                 )}
             </section>
+            
+            <ScrollTopButton />
         </div>
     );
 };
