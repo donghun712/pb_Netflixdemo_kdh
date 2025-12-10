@@ -123,3 +123,12 @@
   font-size: 13px;
   color: #888;
 }
+
+.end-message {
+  margin-top: 20px;
+  color: #666;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
