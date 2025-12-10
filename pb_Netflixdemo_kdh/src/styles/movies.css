@@ -181,3 +181,31 @@
   display: flex;
   justify-content: space-between;
 }
+
+.movie-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.movie-skeleton-card {
+  height: 210px;
+  border-radius: 12px;
+  background: linear-gradient(
+    90deg,
+    #222 0%,
+    #333 20%,
+    #222 40%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.2s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

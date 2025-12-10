@@ -32,8 +32,8 @@
 }
 
 .search-filters {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 16px;
   font-size: 13px;
 }
@@ -92,3 +92,10 @@
   color: #888;
 }
 
+.search-form {
+  position: sticky;
+  top: 56px; /* 헤더 높이에 맞춰 조정 */
+  z-index: 900;
+  background: #050505;
+  border-bottom: 1px solid #222;
+}

@@ -9,6 +9,7 @@ import { MovieGrid } from "../../components/movies/MovieGrid";
 import { useWishlist } from "../../hooks/useWishlist";
 import "../../styles/movies.css";
 import "../../styles/search.css";
+import { ScrollTopButton } from "../../components/common/ScrollTopButton";
 
 type SortOption = "popularity.desc" | "vote_average.desc" | "release_date.desc";
 
@@ -28,6 +29,28 @@ export const SearchPage: React.FC = () => {
 
     const { toggle, isWishlisted } = useWishlist();
     const sentinelRef = useRef<HTMLDivElement | null>(null);
+
+    const scrollToTop = () => {
+        // 1) 먼저 body/html 시도
+        if (document.documentElement.scrollTop > 0 || document.body.scrollTop > 0) {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+        }
+
+        // 2) 그 다음 .app-main 시도
+        const main = document.querySelector(".app-main") as HTMLElement | null;
+        if (main && main.scrollTop > 0) {
+            main.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+        }
+
+        // 3) page 자체가 스크롤되는 구조라면 여기 잡힘
+        const page = document.querySelector(".page.search-page") as HTMLElement | null;
+        if (page && page.scrollTop > 0) {
+            page.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+        }
+    };
 
     // 장르 목록 로딩
     useEffect(() => {
@@ -96,7 +119,8 @@ export const SearchPage: React.FC = () => {
             setRawResults(res.data.results);
             setPage(res.data.page);
             setTotalPages(res.data.total_pages);
-            window.scrollTo({ top: 0 }); // 맨 위로
+            // ✅ 검색이 끝나면 맨 위로 부드럽게 이동
+            scrollToTop();
         } catch (e) {
             console.error(e);
             setError("검색 중 오류가 발생했습니다.");
@@ -122,7 +146,7 @@ export const SearchPage: React.FC = () => {
         setPage(0);
         setTotalPages(1);
         setError(null);
-        window.scrollTo({ top: 0 });
+        scrollToTop();
     };
 
     // 인피니티 스크롤: sentinel 이 화면에 보이면 다음 page 로딩
@@ -284,6 +308,7 @@ export const SearchPage: React.FC = () => {
                                 : "아래로 스크롤하면 더 불러옵니다."
                             : "마지막 페이지입니다."}
                     </div>
+                    <ScrollTopButton />
                 </>
             )}
         </div>

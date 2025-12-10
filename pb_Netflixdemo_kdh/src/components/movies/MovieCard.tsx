@@ -23,6 +23,7 @@ export const MovieCard: React.FC<Props> = ({
             src={`${IMG_BASE}${movie.poster_path}`}
             alt={movie.title}
             className="movie-card-poster"
+            loading="lazy"
           />
         ) : (
           <div className="movie-card-no-poster">No Image</div>

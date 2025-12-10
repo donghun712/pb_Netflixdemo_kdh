@@ -99,76 +99,99 @@ export const PopularPage: React.FC = () => {
             )}
 
             {view === "table" ? (
-                <div className="popular-table-wrapper">
-                    {popular.isLoading ? (
-                        <div className="section-loading">로딩 중...</div>
-                    ) : (
-                        <>
-                            <table className="popular-table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>제목</th>
-                                        <th>평점</th>
-                                        <th>개봉일</th>
-                                        <th>찜</th>
+                popular.isLoading ? (
+                    <div className="movie-skeleton-grid">
+                        {Array.from({ length: 10 }).map((_, i) => (
+                            <div key={i} className="movie-skeleton-card" />
+                        ))}
+                    </div>
+                ) : (
+                    <div className="popular-table-wrapper">
+                        <table className="popular-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>제목</th>
+                                    <th>평점</th>
+                                    <th>개봉일</th>
+                                    <th>찜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {popular.data.map((m, idx) => (
+                                    <tr key={`${m.id}-${idx}`}>
+                                        <td>{(popular.page - 1) * 20 + idx + 1}</td>
+                                        <td>{m.title}</td>
+                                        <td>{m.vote_average.toFixed(1)}</td>
+                                        <td>{m.release_date}</td>
+                                        <td>
+                                            <button
+                                                onClick={() => toggle(m)}
+                                                className={`wishlist-toggle-small ${isWishlisted(m.id) ? "wishlist-toggle-small-active" : ""
+                                                    }`}
+                                            >
+                                                ♥
+                                            </button>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {currentPageMovies.map((m, idx) => (
-                                        <tr key={`${m.id}-${idx}`}>
-                                            <td>{rankBase + idx + 1}</td>
-                                            <td>{m.title}</td>
-                                            <td>{m.vote_average.toFixed(1)}</td>
-                                            <td>{m.release_date}</td>
-                                            <td>
-                                                <button
-                                                    className={`wishlist-toggle-small ${isWishlisted(m.id) ? "wishlist-toggle-small-active" : ""
-                                                        }`}
-                                                    onClick={() => toggle(m)}
-                                                >
-                                                    ♥
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
+                                ))}
+                            </tbody>
+                        </table>
 
-                            </table>
-
-                            <div className="popular-pagination">
-                                <button
-                                    className="page-btn"
-                                    disabled={popular.page === 1}
-                                    onClick={() => handlePageChange(popular.page - 1)}
-                                >
-                                    이전
-                                </button>
-                                <span className="page-info">
-                                    {popular.page} / {popular.totalPages}
-                                </span>
-                                <button
-                                    className="page-btn"
-                                    disabled={popular.page === popular.totalPages}
-                                    onClick={() => handlePageChange(popular.page + 1)}
-                                >
-                                    다음
-                                </button>
-                            </div>
-                        </>
-                    )}
-                </div>
+                        {/* 페이지네이션 */}
+                        <div className="popular-pagination">
+                            <button
+                                className="page-btn"
+                                disabled={popular.page === 1}
+                                onClick={() => popular.load(popular.page - 1)}
+                            >
+                                이전
+                            </button>
+                            <span className="page-info">
+                                {popular.page} / {popular.totalPages}
+                            </span>
+                            <button
+                                className="page-btn"
+                                disabled={popular.page === popular.totalPages}
+                                onClick={() => popular.load(popular.page + 1)}
+                            >
+                                다음
+                            </button>
+                        </div>
+                    </div>
+                )
             ) : (
+
                 <div className="popular-infinite-wrapper">
-                    <MovieGrid
-                        movies={popular.data}
-                        isWishlisted={isWishlisted}
-                        toggleWishlist={toggle}
-                    />
+
+                    {/* 최초 로딩 시 스켈레톤 */}
+                    {popular.isLoading ? (
+                        <div className="movie-skeleton-grid">
+                            {Array.from({ length: 12 }).map((_, i) => (
+                                <div key={i} className="movie-skeleton-card" />
+                            ))}
+                        </div>
+                    ) : (
+                        <MovieGrid
+                            movies={popular.data}
+                            isWishlisted={isWishlisted}
+                            toggleWishlist={toggle}
+                        />
+                    )}
+
+                    {/* 아래로 스크롤할 때 더 불러오는 스켈레톤 */}
                     <div ref={sentinelRef} className="popular-sentinel">
-                        {isFetchingMore && <span>더 불러오는 중...</span>}
+                        {isFetchingMore && (
+                            <div className="movie-skeleton-grid">
+                                {Array.from({ length: 6 }).map((_, i) => (
+                                    <div key={i} className="movie-skeleton-card" />
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
+
+
             )}
 
             <ScrollTopButton />
