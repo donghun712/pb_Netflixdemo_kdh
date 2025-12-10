@@ -1,21 +1,19 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+
 import { SignInPage } from "../pages/SignIn/SignInPage";
-import { Header } from "../components/layout/Header";
-import { ProtectedRoute } from "./ProtectedRoute";
 import { HomePage } from "../pages/Home/HomePage";
 import { PopularPage } from "../pages/Popular/PopularPage";
-import { SearchPage } from "../pages/Search/SearchPage"; // ✅ 추가
+import { SearchPage } from "../pages/Search/SearchPage";
+import { WishlistPage } from "../pages/Wishlist/WishlistPage";
 
-const TempWishlist: React.FC = () => (
-  <div className="page">
-    <h1>Wishlist (temp)</h1>
-  </div>
-);
+import { Header } from "../components/layout/Header";
+import { ProtectedRoute } from "./ProtectedRoute";
 
-const TempNotFound: React.FC = () => (
+const NotFoundPage: React.FC = () => (
   <div className="page">
     <h1>404</h1>
+    <p>페이지를 찾을 수 없습니다.</p>
   </div>
 );
 
@@ -25,8 +23,10 @@ export const AppRouter: React.FC = () => {
       <Header />
       <main className="app-main">
         <Routes>
+          {/* 로그인 페이지는 보호 X */}
           <Route path="/signin" element={<SignInPage />} />
 
+          {/* 아래부터는 로그인 필요 */}
           <Route
             path="/"
             element={
@@ -49,7 +49,7 @@ export const AppRouter: React.FC = () => {
             path="/search"
             element={
               <ProtectedRoute>
-                <SearchPage /> 
+                <SearchPage />
               </ProtectedRoute>
             }
           />
@@ -58,12 +58,13 @@ export const AppRouter: React.FC = () => {
             path="/wishlist"
             element={
               <ProtectedRoute>
-                <TempWishlist />
+                <WishlistPage />
               </ProtectedRoute>
             }
           />
 
-          <Route path="*" element={<TempNotFound />} />
+          {/* 그 외 모든 경로 */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
     </>

@@ -1,0 +1,23 @@
+.wishlist-page {
+  padding-top: 16px;
+}
+
+.wishlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.wishlist-header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.wishlist-empty {
+  margin-top: 40px;
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.6;
+}
