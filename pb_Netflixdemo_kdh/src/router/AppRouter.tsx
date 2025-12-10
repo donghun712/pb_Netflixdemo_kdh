@@ -6,6 +6,7 @@ import { HomePage } from "../pages/Home/HomePage";
 import { PopularPage } from "../pages/Popular/PopularPage";
 import { SearchPage } from "../pages/Search/SearchPage";
 import { WishlistPage } from "../pages/Wishlist/WishlistPage";
+import { MovieDetailPage } from "../pages/Movie/MovieDetailPage"; // ✅ 추가
 
 import { Header } from "../components/layout/Header";
 import { ProtectedRoute } from "./ProtectedRoute";
@@ -59,6 +60,16 @@ export const AppRouter: React.FC = () => {
             element={
               <ProtectedRoute>
                 <WishlistPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* ✅ 영화 상세보기 라우트 추가 */}
+          <Route
+            path="/movie/:id"
+            element={
+              <ProtectedRoute>
+                <MovieDetailPage />
               </ProtectedRoute>
             }
           />

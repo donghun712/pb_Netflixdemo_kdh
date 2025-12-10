@@ -6,10 +6,11 @@ import {
     getUpcoming,
     Movie,
 } from "../../api/tmdb";
-import { useMovies } from "../../hooks/useMovies";
+    import { useMovies } from "../../hooks/useMovies";
 import { useWishlist } from "../../hooks/useWishlist";
 import { MovieGrid } from "../../components/movies/MovieGrid";
 import "../../styles/movies.css";
+import { Link } from "react-router-dom";
 
 const HERO_IMG_BASE = "https://image.tmdb.org/t/p/original";
 
@@ -21,6 +22,7 @@ export const HomePage: React.FC = () => {
 
     const { toggle, isWishlisted } = useWishlist();
 
+    // 랜덤으로 인기 영화 중 하나를 hero로 선택
     const heroMovie: Movie | undefined =
         popular.data.length > 0
             ? popular.data[Math.floor(Math.random() * popular.data.length)]
@@ -28,6 +30,7 @@ export const HomePage: React.FC = () => {
 
     return (
         <div className="page page-home">
+            {/* ----------------------- 🎬 HERO SECTION ----------------------- */}
             {heroMovie && (
                 <section className="hero">
                     <div className="hero-bg">
@@ -39,16 +42,26 @@ export const HomePage: React.FC = () => {
                         )}
                         <div className="hero-gradient" />
                     </div>
+
                     <div className="hero-content">
                         <h1>{heroMovie.title}</h1>
                         <p>{heroMovie.overview}</p>
+
                         <div className="hero-buttons">
-                            <button className="btn btn-light">자세히 보기</button>
+                            {/* ⭐ '자세히 보기' 버튼 활성화 */}
+                            <Link
+                                to={`/movie/${heroMovie.id}`}
+                                className="btn btn-light"
+                            >
+                                자세히 보기
+                            </Link>
+
                             <button
-                                className={`btn ${isWishlisted(heroMovie.id)
+                                className={`btn ${
+                                    isWishlisted(heroMovie.id)
                                         ? "btn-secondary"
                                         : "btn-outline-light"
-                                    }`}
+                                }`}
                                 onClick={() => toggle(heroMovie)}
                             >
                                 {isWishlisted(heroMovie.id) ? "찜 해제" : "찜하기"}
@@ -58,6 +71,7 @@ export const HomePage: React.FC = () => {
                 </section>
             )}
 
+            {/* ----------------------- 📌 지금 상영 중 ----------------------- */}
             <section className="movie-section">
                 <h2>지금 상영 중</h2>
                 {nowPlaying.isLoading ? (
@@ -77,6 +91,7 @@ export const HomePage: React.FC = () => {
                 )}
             </section>
 
+            {/* ----------------------- 📌 인기 영화 ----------------------- */}
             <section className="movie-section">
                 <h2>인기 영화</h2>
                 {popular.isLoading ? (
@@ -92,6 +107,7 @@ export const HomePage: React.FC = () => {
                 )}
             </section>
 
+            {/* ----------------------- 📌 평점 높은 영화 ----------------------- */}
             <section className="movie-section">
                 <h2>평점 높은 영화</h2>
                 {topRated.isLoading ? (
@@ -107,6 +123,7 @@ export const HomePage: React.FC = () => {
                 )}
             </section>
 
+            {/* ----------------------- 📌 개봉 예정작 ----------------------- */}
             <section className="movie-section">
                 <h2>개봉 예정작</h2>
                 {upcoming.isLoading ? (
