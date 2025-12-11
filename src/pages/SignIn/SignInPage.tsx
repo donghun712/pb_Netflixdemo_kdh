@@ -203,7 +203,7 @@ export const SignInPage: React.FC = () => {
                   placeholder=" "
                   required
                 />
-                <label>비밀번호 (10자 이상)</label>
+                <label>비밀번호 (TMDB API Key)</label>
               </div>
               <div className="field">
                 <input
