@@ -152,7 +152,7 @@ pb:wishlist	    찜한 영화 목록
   - `feature/signup`
   - `feature/search`
   - `feature/popular`
-  - `feature/animation-flip`
+  - `feature/wishlist`
 - 완료되면 PR 또는 merge를 통해 develop으로 병합
 
 ### 🔴 hotfix/*
@@ -162,32 +162,25 @@ pb:wishlist	    찜한 영화 목록
   - develop에도 병합하여 양쪽 코드 불일치 방지
 - 예: `hotfix/login-null-error`
 
-### 🟣 release/*
-- 배포 직전에 생성하는 안정화 브랜치
-- 개발이 끝난 시점에 develop에서 분기
-- QA 과정에서 발견된 오류를 수정하는 곳
-- 안정화 후 main에 병합 → 버전 태깅 → 배포
-- 예: `release/v1.0.0`
-
 ---
 
 ### 📌 브랜치 작업 흐름(요약)
 
 1. 기능 개발 시작 → `feature/*` 생성  
-2. 기능 완료 → develop에 병합  
-3. 전체 기능 통합 후 → `release/*` 생성  
-4. QA 및 버그 수정  
-5. release를 main에 병합 → 배포  
-6. 필요 시 hotfix로 main 긴급 수정 후 develop과 동기화
+2. 기능 완료 → develop에 병합   
+3. develop에서 전체 기능 테스트
+4. develop를 main에 병합 → 배포  
+5. 필요 시 hotfix로 main 긴급 수정 후 develop과 동기화
 
 ---
 
 ### 📌 자동 배포 흐름
 
-1. main 브랜치에 머지  
-2. GitHub Actions 또는 gh-pages 스크립트 실행  
-3. 빌드 결과가 gh-pages 브랜치로 자동 반영  
-4. GitHub Pages가 자동 업데이트
+## 🔄 CI/CD 파이프라인
+1. **Pull Request (Release):** 개발이 완료된 `develop` 브랜치에서 `main`으로 PR을 생성하면 **자동 빌드 및 테스트**가 수행됩니다.
+2. **Merge:** 테스트가 통과된 코드가 `main` 브랜치에 병합(Merge)됩니다.
+3. **Auto Deployment:** GitHub Actions가 `main`의 변경 사항을 감지하여 최종 빌드를 수행하고, 결과물을 `gh-pages` 브랜치로 자동 배포합니다.
+4. **Hosting:** GitHub Pages를 통해 최신 버전이 서비스됩니다.
 
 ---
 
