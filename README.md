@@ -58,19 +58,23 @@ npm run deploy
 
 ---
 
-## 5. 📁 폴더 구조 요약
-pb_Netflixdemo_kdh/
-  public/
-  src/
-    api/
-    components/
-    pages/
-    styles/
-    utils/
-    App.jsx
-    main.jsx
-  package.json
-  vite.config.js
+## 5. 📁 폴더 구조
+
+```text
+.
+├── public/                 # 정적 리소스 (favicon, robots.txt 등)
+├── src/                    # 소스 코드 메인 디렉토리
+│   ├── api/                # API 통신 관련 로직 (TMDB axios 인스턴스 등)
+│   ├── components/         # 재사용 가능한 UI 컴포넌트 (Header, MovieCard 등)
+│   ├── context/            # 전역 상태 관리 (AuthContext, ToastContext)
+│   ├── hooks/              # 커스텀 훅 (useDebounce, useMovieFetch 등)
+│   ├── pages/              # 라우트별 페이지 컴포넌트 (Home, Search, SignIn 등)
+│   ├── router/             # 라우팅 설정 (AppRouter, ProtectedRoute)
+│   ├── styles/             # 전역 스타일 및 CSS 파일 (global.css, auth.css 등)
+│   ├── App.tsx             # 앱 메인 컴포넌트 (Provider 래핑)
+│   └── main.tsx            # 앱 진입점 (HashRouter 설정 및 렌더링)
+├── package.json            # 프로젝트 의존성 및 스크립트 관리
+└── vite.config.ts          # Vite 빌드 및 배포 설정
 
 ---
 
