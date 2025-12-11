@@ -9,28 +9,88 @@
   border-radius: 12px;
   background: #050505;
   border: 1px solid #222;
+  position: sticky;
+  top: 56px; 
+  z-index: 900;
+  border-bottom: 1px solid #222;
 }
 
 .search-row {
   display: flex;
   gap: 8px;
   margin-bottom: 12px;
+  align-items: center; 
 }
 
 .search-input {
   flex: 1;
-  padding: 8px 12px;
+  height: 44px; 
+  padding: 0 16px; 
   border-radius: 999px;
   border: 1px solid #555;
   background: #111;
   color: #fff;
   outline: none;
+  box-sizing: border-box;
+  font-size: 15px;
+  margin: 0;
 }
 
 .search-input:focus {
   border-color: #8884ff;
 }
 
+/* 1. 버튼 공통 레이아웃 (색상 제외) */
+.search-row button {
+  height: 44px; 
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid transparent; /* 테두리 투명으로 설정 */
+  color: white;
+  font-size: 14px;
+  font-weight: 600; /* 글씨 조금 더 굵게 */
+  cursor: pointer;
+  
+  /* 위치 및 크기 보정 */
+  margin: 0;
+  box-sizing: border-box;
+  vertical-align: middle;
+  line-height: 1;
+  white-space: nowrap; 
+  flex-shrink: 0; 
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  transition: all 0.2s ease;
+}
+
+/* ✨ [수정] 초기화 버튼 스타일 (빨간색) */
+/* type="button"인 경우 (초기화) */
+.search-row button[type="button"] {
+  background: #3e3e3e; /* 넷플릭스 레드 */
+  border: 1px solid #383737;
+}
+
+.search-row button[type="button"]:hover {
+  background: #b20710; /* 호버 시 더 진한 빨강 */
+  border-color: #b20710;
+}
+
+/* ✨ [수정] 검색 버튼 스타일 (보라색) */
+/* type="submit"인 경우 (검색) */
+.search-row button[type="submit"] {
+  background: #8884ff; /* 브랜드 퍼플 */
+  border: 1px solid #8884ff;
+}
+
+.search-row button[type="submit"]:hover {
+  background: #6f6bff; /* 호버 시 밝은 보라 */
+  border-color: #6f6bff;
+}
+
+/* 필터 스타일 */
 .search-filters {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -54,10 +114,14 @@
   border: 1px solid #555;
   background: #111;
   color: #fff;
+  height: 32px;
+  box-sizing: border-box;
 }
 
 .filter-group input[type="range"] {
   width: 140px;
+  margin: 0;
+  vertical-align: middle;
 }
 
 .filter-value {
@@ -77,7 +141,6 @@
   color: #ccc;
 }
 
-/* 페이지네이션 재사용 스타일 활용 */
 .search-pagination {
   display: flex;
   justify-content: center;
@@ -92,10 +155,24 @@
   color: #888;
 }
 
-.search-form {
-  position: sticky;
-  top: 56px; /* 헤더 높이에 맞춰 조정 */
-  z-index: 900;
-  background: #050505;
-  border-bottom: 1px solid #222;
+/* 모바일 전용 레이아웃 */
+@media (max-width: 768px) {
+  .search-row {
+    flex-wrap: wrap; 
+  }
+
+  .search-input {
+    width: 100%;
+    flex: 1 1 100%; 
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .search-row button {
+    flex: 1; 
+    height: 48px;
+    font-size: 14px;
+    padding: 0; 
+    margin: 0;
+  }
 }
