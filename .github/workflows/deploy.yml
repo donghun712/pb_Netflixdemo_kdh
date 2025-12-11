@@ -1,0 +1,43 @@
+name: CI/CD Deployment
+
+# 1. 트리거: 언제 실행할까요?
+on:
+  push:
+    branches: ["main"]       # main에 코드가 올라오면 (배포 수행)
+  pull_request:
+    branches: ["main"]       # main으로 합치려는 요청이 오면 (테스트만 수행)
+
+# 2. 권한 설정: 로봇이 레포지토리에 쓸 수 있어야 함
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # (1) 코드 내려받기
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      # (2) Node.js 설치 (버전 20 사용)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # (3) 패키지 설치
+      - name: Install Dependencies
+        run: npm install
+
+      # (4) 빌드 및 테스트 (여기서 실패하면 배포 안 됨 -> 안전장치)
+      - name: Build Project
+        run: npm run build
+
+      # (5) 배포 (main 브랜치에 push된 경우에만 실행)
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist  # vite 기본 빌드 폴더인 dist를 올립니다
