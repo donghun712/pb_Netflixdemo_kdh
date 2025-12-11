@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+// 👇 수정됨: HashRouter 사용
+import { HashRouter } from "react-router-dom";
 import App from "./App";
-import "./styles/global.css";
+import "./styles/global.css"; // (이 경로에 css 파일이 있어야 합니다)
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <BrowserRouter>
+    {/* 👇 수정됨: 앱 전체를 HashRouter로 감싸기 */}
+    <HashRouter>
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );

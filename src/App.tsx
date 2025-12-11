@@ -5,6 +5,7 @@ import { ToastProvider } from "./components/common/ToastContext";
 
 const App: React.FC = () => {
   return (
+    // main.tsx에 Router가 있으므로 여기는 Provider만 감쌉니다.
     <AuthProvider>
       <ToastProvider>
         <AppRouter />
