@@ -75,6 +75,7 @@ npm run deploy
 │   └── main.tsx            # 앱 진입점 (HashRouter 설정 및 렌더링)
 ├── package.json            # 프로젝트 의존성 및 스크립트 관리
 └── vite.config.ts          # Vite 빌드 및 배포 설정
+```
 
 ---
 
