@@ -1,4 +1,4 @@
-# Netflix Demo – 2차 과제 (WSD)
+# Netflix Demo 
 
 TMDB API 기반 Netflix 스타일 영화 정보 서비스입니다.  
 로그인/회원가입, 인기 영화, 검색, 위시리스트 등을 포함한 SPA 구조의 웹 애플리케이션입니다.
@@ -10,7 +10,6 @@ TMDB API 기반 Netflix 스타일 영화 정보 서비스입니다.
 
 ## 1. 🔎 프로젝트 소개
 
-이 프로젝트는 Web Service Development 2차 과제 제출용으로 제작되었습니다.  
 TMDB API를 기반으로 영화 데이터를 불러오며, 로그인/회원가입, 찜 목록 저장, 검색, 인기 영화 리스트 등 다양한 기능을 갖춘 SPA입니다.
 
 ### 주요 특징
@@ -52,11 +51,10 @@ npm run deploy
 
 ---
 
-## 4. 🔑 환경 변수 설정 (TMDB API KEY)
+## 4. 🔑 TMDB API Key 사용 방식
 
-프로젝트 루트에 .env 파일을 만들고 아래를 입력하세요:
-
-VITE_TMDB_API_KEY=YOUR_TMDB_API_KEY
+이 프로젝트는 별도의 환경변수(.env)를 사용하지 않으며,  
+비밀번호에 TMDB API Key를 사용하는 방식으로 구현하였습니다.
 
 ---
 
